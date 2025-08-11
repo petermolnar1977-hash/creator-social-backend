@@ -40,3 +40,4 @@ export const verifyEmail = async (req: Request, res: Response) => {
     res.status(400).json({ message: "Invalid or expired token" });
   }
 };
+router.post("/login", login);
