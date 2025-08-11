@@ -6,12 +6,20 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
-
 model User {
   id        String   @id @default(cuid())
   name      String
   email     String   @unique
   password  String
   verified  Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+model Post {
+  id        String   @id @default(cuid())
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  String
+  content   String?
+  mediaUrl  String?
+  type      String   // "image", "video", or "blog"
   createdAt DateTime @default(now())
 }
